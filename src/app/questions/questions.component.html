@@ -1,0 +1,196 @@
+<h3>Demo</h3>
+<hr>
+<div class="tabs">
+    <div class="tab" *ngFor="let tab of tabs" (click)="showSection($event)">{{tab.name}}</div>
+</div>
+<div class="row">
+
+    <div class="col-sm-3">
+        <div class="card card-outline-success mb-3">
+            <div class="card-header card-inverse card-success">
+                <!-- Team Members -->
+            </div>
+            <div class="card-block scroll-list">
+                <div class="list-group">
+                    <li class="list-group-item list-group-item-action list-group-item-success" [draggable] *ngFor="let item of teamMemberQuestions" [dragClass]="'active'" [dragData]="item" [dragScope]="item.type" [dragEnabled]="teamMemberQuestionDragEnabled">
+                        {{item.text}}
+                    </li>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <div class="form-check">
+                    <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="" title="Drag Enabled" [(ngModel)]="teamMemberQuestionDragEnabled">
+                  Drag Enabled
+                </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-outline-primary mb-3">
+            <div class="card-header card-inverse card-primary">Draggable Items with Handle</div>
+            <div class="card-block scroll-list">
+                <ul class="list-group text-center">
+                    <li draggable *ngFor="let item of teamMemberQuestions" [dragClass]="'drag-over'" [dragData]="item" class="list-group-item justify-content-between list-group-item-action" [dragScope]="item.type" [dragHandle]="'.drag-bar'">
+                        {{item.text}}
+                        <i #dragHandle class="drag-bar fa fa-bars fa-lg" aria-hidden="true"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="card card-outline-primary mb-3" droppable [dragOverClass]="'drag-target-border'" [dropScope]="'teamMember'" [dragHintClass]="'drag-hint'" (onDrop)="onTeamMemberQuestionDrop($event)" [dropEnabled]="teamMemberQuestionDropEnabled">
+            <div class="card-header card-inverse card-primary">
+                Team Member Questions
+            </div>
+            <div class="card-block scroll-list">
+                <li *ngFor="let item of selectedTeamMemberQuestions" class="list-group-item">{{item.text}}</li>
+            </div>
+
+            <div class="card-footer">
+                <div class="form-check">
+                    <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="" [(ngModel)]="teamMemberQuestionDropEnabled">
+                  Drop Enabled
+                </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-sm-3">
+        <div class="card card-outline-success mb-3">
+            <div class="card-header card-inverse card-success">
+                <!-- Direct Reports -->
+            </div>
+            <div class="card-block scroll-list">
+                <div class="list-group">
+                    <li class="list-group-item list-group-item-action list-group-item-success" [draggable] *ngFor="let item of directReportQuestions" [dragClass]="'active'" [dragData]="item" [dragScope]="item.type" [dragEnabled]="directReportQuestionDragEnabled">
+                        {{item.text}}
+                    </li>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <div class="form-check">
+                    <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="" title="Drag Enabled" [(ngModel)]="directReportQuestionDragEnabled">
+                  Drag Enabled
+                </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-outline-primary mb-3">
+            <div class="card-header card-inverse card-primary">Draggable Items with Handle</div>
+            <div class="card-block scroll-list">
+                <ul class="list-group text-center">
+                    <li draggable *ngFor="let item of directReportQuestions" [dragClass]="'drag-over'" [dragData]="item" class="list-group-item justify-content-between list-group-item-action" [dragScope]="item.type" [dragHandle]="'.drag-bar'">
+                        {{item.text}}
+                        <i #dragHandle class="drag-bar fa fa-bars fa-lg" aria-hidden="true"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="card card-outline-primary mb-3" droppable [dragOverClass]="'drag-target-border'" [dropScope]="'teamMember'" [dragHintClass]="'drag-hint'" (onDrop)="onDirectReportQuestionDrop($event)" [dropEnabled]="directReportQuestionDropEnabled">
+            <div class="card-header card-inverse card-primary">
+                Direct Report Questions
+            </div>
+            <div class="card-block scroll-list">
+                <li *ngFor="let item of selectedDirectReportQuestions" class="list-group-item">{{item.text}}</li>
+            </div>
+
+            <div class="card-footer">
+                <div class="form-check">
+                    <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="" [(ngModel)]="directReportQuestionDropEnabled">
+                  Drop Enabled
+                </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="card card-outline-success mb-3">
+            <div class="card-header card-inverse card-success">
+                <!-- Managers -->
+            </div>
+            <div class="card-block scroll-list">
+                <div class="list-group">
+                    <li class="list-group-item list-group-item-action list-group-item-success" [draggable] *ngFor="let item of managerQuestions" [dragClass]="'active'" [dragData]="item" [dragScope]="item.type" [dragEnabled]="managerQuestionDragEnabled">
+                        {{item.text}}
+                    </li>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <div class="form-check">
+                    <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="" title="Drag Enabled" [(ngModel)]="managerQuestionDragEnabled">
+                  Drag Enabled
+                </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-outline-primary mb-3">
+            <div class="card-header card-inverse card-primary">Draggable Items with Handle</div>
+            <div class="card-block scroll-list">
+                <ul class="list-group text-center">
+                    <li draggable *ngFor="let item of managerQuestions" [dragClass]="'drag-over'" [dragData]="item" class="list-group-item justify-content-between list-group-item-action" [dragScope]="item.type" [dragHandle]="'.drag-bar'">
+                        {{item.text}}
+                        <i #dragHandle class="drag-bar fa fa-bars fa-lg" aria-hidden="true"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="card card-outline-primary mb-3" droppable [dragOverClass]="'drag-target-border'" [dropScope]="'teamMember'" [dragHintClass]="'drag-hint'" (onDrop)="onManagerQuestionDrop($event)" [dropEnabled]="managerQuestionDropEnabled">
+            <div class="card-header card-inverse card-primary">
+                Manager Questions
+            </div>
+            <div class="card-block scroll-list">
+                <li *ngFor="let item of selectedManagerQuestions" class="list-group-item">{{item.text}}</li>
+            </div>
+
+            <div class="card-footer">
+                <div class="form-check">
+                    <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" value="" [(ngModel)]="managerQuestionDropEnabled">
+                  Drop Enabled
+                </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <div class="col-sm-3">
+        <div class="card card-outline-primary mb-3" droppable [dragOverClass]="'drag-target-border-green'" [dropScope]="'directReport'" [dragHintClass]="'drag-hint'" (onDrop)="onDirectReportQuestionDrop($event)">
+            <div class="card-header card-inverse card-primary">Vegetables</div>
+            <div class="card-block scroll-list">
+                <li *ngFor="let item of droppedVegetables" class="list-group-item">{{item.text}}</li>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="card card-outline-primary mb-3" droppable [dragOverClass]="'drag-target-border'" [dropScope]="['fruit', 'vegetable']" [dragHintClass]="'drag-hint'" (onDrop)="onAnyDrop($event)">
+            <div class="card-header card-inverse card-primary">Anything</div>
+            <div class="card-block scroll-list">
+                <li *ngFor="let item of droppedItems" class="list-group-item">{{item.text}}</li>
+            </div>
+        </div>
+    </div> -->
+
+</div>
